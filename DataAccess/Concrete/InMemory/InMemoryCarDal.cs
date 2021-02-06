@@ -3,6 +3,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace DataAccess.Concrete.InMemory
@@ -12,12 +13,8 @@ namespace DataAccess.Concrete.InMemory
         List<Car> _car;
         public InMemoryCarDal()
         {
-            _car = new List<Car> { new Car { Id = 1, BrandId = "BMW", ColorId = "Kırmızı", DailyPrice = 350, ModelYear = 2014, Description = "Kırmızı BMW" },
-                new Car { Id = 1, BrandId = "Mercedes", ColorId = "Beyaz", DailyPrice = 500, ModelYear = 2017, Description = "Beyaz Mercedes" },
-                new Car { Id = 2, BrandId = "Ford", ColorId = "Mavi", DailyPrice = 250, ModelYear = 2013, Description = "Mavi Ford" },
-                new Car { Id = 3, BrandId = "Opel", ColorId = "Kırmızı", DailyPrice = 350, ModelYear = 2014, Description = "Kırmızı Opel" },
-                new Car { Id = 4, BrandId = "Volvo", ColorId = "Gri", DailyPrice = 750, ModelYear = 2020, Description = "Gri Volvo" },
-                new Car { Id = 5, BrandId = "Toyota", ColorId = "Bej", DailyPrice = 350, ModelYear = 2016, Description = "Bej Toyota" },
+            _car = new List<Car> { new Car { CarId = 1, BrandId = 1, ColorId = 1, DailyPrice = 350, ModelYear =" 2014", Descriptions = "Kırmızı BMW" },
+               new Car { CarId = 1, BrandId = 1, ColorId = 1, DailyPrice = 350, ModelYear =" 2014", Descriptions = "Kırmızı BMW" }
             };
             
         }
@@ -31,14 +28,24 @@ namespace DataAccess.Concrete.InMemory
             _car.Remove(deleteToCar);
         }
 
+        public Car Get(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Car> GetAll()
         {
             return _car;
         }
 
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Car> GetById(int Id)
         {
-            return _car.Where(c => c.Id == Id).ToList();
+            return _car.Where(c => c.CarId == Id).ToList();
         }
 
         public void Update(Car car)
@@ -47,8 +54,8 @@ namespace DataAccess.Concrete.InMemory
             uptadeToCar.BrandId = car.BrandId;
             uptadeToCar.ColorId = car.ColorId;
             uptadeToCar.DailyPrice = car.DailyPrice;
-            uptadeToCar.Description = car.Description;
-            uptadeToCar.Id = car.Id;
+            uptadeToCar.Descriptions = car.Descriptions;
+            uptadeToCar.CarId = car.CarId;
             uptadeToCar.ModelYear = car.ModelYear;
         }
     }
