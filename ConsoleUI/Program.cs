@@ -13,11 +13,27 @@ namespace ConsoleUI
             //CarTest();
             //BrandTest();
             //ColorTest();
+            //CarDetailTest();
+
+            RentalMenager rentalMenager = new RentalMenager(new EfRentalDal());
+            var result = rentalMenager.GetAll();
+            if (result.Success==true)
+            {
+                foreach (var rent in result.Data)
+                {
+                    Console.WriteLine(rent.CarId+"--"+rent.CustomerId+"--"+rent.RentDate+"--"+rent.ReturnDate);
+                }
+            }
+
+        }
+
+        private static void CarDetailTest()
+        {
             CarMenager carMenager = new CarMenager(new EfCarDal());
 
             var result = carMenager.GetCarDetails();
             carMenager.Add(new Car { BrandId = 5, ColorId = 3, DailyPrice = 350, Descriptions = "Yeni Araba", ModelYear = "2015" });
-            if (result.Success==true)
+            if (result.Success == true)
             {
                 foreach (var details in result.Data)
                 {
@@ -28,7 +44,6 @@ namespace ConsoleUI
             {
                 Console.WriteLine(result.Message);
             }
-            
         }
 
         //private static void ColorTest()

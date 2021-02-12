@@ -49,7 +49,7 @@ namespace Business.Concrete
 
         public IDataResult<Brand> GetById(int id)
         {
-            return new SuccessDataResult<Brand>(_brandDal.Get(b => b.BrandId == id),Messages.DataResultListMessage);
+            return new SuccessDataResult<Brand>(_brandDal.Get(b => b.Id == id),Messages.DataResultListMessage);
         }
 
         public IResult Update(Brand brand)

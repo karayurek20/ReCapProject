@@ -20,5 +20,9 @@ namespace Business.Constants
         public static string ColorErrorMessage = "Araba Rengi en az 3 karekter olmalıdır";
         public static string DataResultListMessage = "Ürünler listelendi";
         public static string DataResultErrorMessage = "Bakım zamanı";
+        public static string RentalAddedMessage = "Araba kiralama bilgisi eklendi";
+        public static string RentalDeletedMessage = "Araba kiralama bilgisi silindi";
+        public static string RentalUpdatedMessage = "Araba kiralama bilgisi güncellendi";
+        public static string DataResultReturnTimeMessage = "Araba daha teslim alınamadı";
     }
 }

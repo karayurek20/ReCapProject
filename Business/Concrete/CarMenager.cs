@@ -52,7 +52,7 @@ namespace Business.Concrete
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            if (DateTime.Now.Hour==13)
+            if (DateTime.Now.Hour==12)
             {
                 return new ErrorDataResult<List<CarDetailDto>>(Messages.DataResultErrorMessage);
             }
