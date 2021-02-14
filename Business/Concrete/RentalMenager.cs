@@ -38,7 +38,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Rental>> GetAll()
         {
-
+            
             return new SuccessDataResult<List<Rental>>(_rental.GetAll(), Messages.DataResultListMessage);
 
         }
