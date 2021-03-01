@@ -7,5 +7,6 @@ namespace DataAccess.Abstract
 {
     public interface IUserDal:IEntityResponsibility<User>
     {
+        List<OperationClaim> GetClaims(User user);
     }
 }

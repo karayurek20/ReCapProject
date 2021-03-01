@@ -19,34 +19,20 @@ namespace Business.Concrete
         {
             _userDal = userDal;
         }
-        [ValidationAspect(typeof(CarValidator))]
-        public IResult Add(User user)
+
+        public List<OperationClaim> GetClaims(User user)
+        {
+            return _userDal.GetClaims(user);
+        }
+
+        public void Add(User user)
         {
             _userDal.Add(user);
-            return new SuccessResult(Messages.CarAddedMessage);
         }
 
-        public IResult Delete(User user)
+        public User GetByMail(string email)
         {
-            _userDal.Delete(user);
-            return new SuccessResult(Messages.CarDeletedMessage);
-        }
-
-        public IDataResult<List<User>> GetAll()
-        {
-            return new SuccessDataResult<List<User>>(_userDal.GetAll(),Messages.DataResultListMessage);
-        }
-
-        public IDataResult<User> GetById(int id)
-        {
-         
-            return new SuccessDataResult<User>(_userDal.Get(c => c.Id == id), Messages.DataResultListMessage);
-        }
-
-        public IResult Update(User user)
-        {
-            _userDal.Update(user);
-            return new SuccessResult(Messages.CarUpdatedMessage);
+            return _userDal.Get(u => u.Email == email);
         }
     }
 }
