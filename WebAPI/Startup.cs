@@ -73,7 +73,7 @@ namespace WebAPI
                         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
                     };
                 });
-
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             ServiceTool.Create(services);
         }
 
@@ -90,6 +90,8 @@ namespace WebAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
