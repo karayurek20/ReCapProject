@@ -2,6 +2,9 @@
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transcation;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
@@ -12,6 +15,7 @@ using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Business.Concrete
 {
@@ -31,15 +35,24 @@ namespace Business.Concrete
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAddedMessage);
         }
+        [TransactionScopeAspect]
+        public IResult TransactionalOperation(Car car)
+        {
+            _carDal.Update(car);
+            _carDal.Add(car);
+            return new SuccessResult(Messages.ColorAddedMessage);
+        }
 
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeletedMessage);
         }
-
+        //[CacheAspect]
+        [PerformanceAspect(5)]
         public IDataResult<List<Car>> GetAll()
         {
+            Thread.Sleep(5000); 
             if (DateTime.Now.Hour==13)
             {
                 return new ErrorDataResult<List<Car>>(Messages.DataResultErrorMessage);
