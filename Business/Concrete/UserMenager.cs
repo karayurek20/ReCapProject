@@ -13,26 +13,33 @@ namespace Business.Concrete
 {
     public class UserMenager : IUserService
     {
-        IUserDal _userDal;
+        private IUserDal _UserDal;
 
         public UserMenager(IUserDal userDal)
         {
-            _userDal = userDal;
+            _UserDal = userDal;
         }
 
-        public List<OperationClaim> GetClaims(User user)
+        public IResult Add(User user)
         {
-            return _userDal.GetClaims(user);
+            
+            _UserDal.Add(user);
+            return new SuccessResult("user added");
         }
 
-        public void Add(User user)
+        public IDataResult<User> GetByMail(string email)
         {
-            _userDal.Add(user);
+            var result = _UserDal.Get(u => u.Email == email);
+            if (result == null)
+            {
+                return new ErrorDataResult<User>(Messages.UserNotFound);
+            }
+            return new SuccessDataResult<User>(result);
         }
 
-        public User GetByMail(string email)
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
         {
-            return _userDal.Get(u => u.Email == email);
+            return new SuccessDataResult<List<OperationClaim>>(_UserDal.GetClaims(user));
         }
     }
 }
